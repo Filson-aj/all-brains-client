@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
-function App() {
+import { urls } from './assets/constants/data'
+import useTitle from './hooks/useTitle'
+import Layout from './components/Layout/Layout'
+import Landing from './components/Landing/Landing'
+import NotFound from './components/NotFound/NotFound'
+
+const App = () => {
+  useTitle('Home Page | Abuja College')
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Routes>
+      <Route path={urls.root} element={<Layout />}>{/* --- root route --- */}
+      
+        {/* --- Public Routes --- */}
+        <Route index element={<Landing />} />
+        {/* <Route path={urls.signin} element={<Login />} /> */}
+
+        {/* This is the catch-all route for 404 */}
+        <Route path="*" element={<NotFound />} />
+
+      </Route>{/* --- end root route --- */}
+    </Routes>
+  )
 }
 
-export default App;
+export default App
